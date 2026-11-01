@@ -36,8 +36,8 @@ metadata:
 
 | 层 | 选型 | 备注 |
 |---|---|---|
-| 框架 | Next.js 15 App Router + TypeScript | 严格模式，不用 Pages Router |
-| 样式 | Tailwind CSS v3/v4 | **不引 shadcn / antd / MUI / Chakra** |
+| 框架 | Next.js 16.4 App Router + React 19 + TypeScript | 严格模式，不用 Pages Router |
+| 样式 | Tailwind CSS v4 | 无 `tailwind.config.js`，主题令牌写在 `src/app/globals.css` 的 `@theme`；**不引 shadcn / antd / MUI / Chakra** |
 | 后端 | Next.js Route Handler `src/app/api/**` | **不单独起 Node/Python 服务** |
 | 数据库 | SQLite + `better-sqlite3`（同步 API） | **不用 ORM、不用 Prisma** |
 | AI | 阿里百炼 DashScope OpenAI 兼容端点 | `qwen-vl-max` / `qwen-plus` / `text-embedding-v3` |
@@ -75,6 +75,7 @@ docs/ prompts/         文档与分轮提示词
 5. 错误处理：API 统一返回 `{ ok: false, code, message }`，`message` 面向用户、不含堆栈与 SQL。
 6. 注释：默认不写。只在写"为什么"（口径、兜底策略、非直觉的取舍）时写一行。
 7. 不写用不到的抽象、不留 TODO 让人补、不写空壳函数。
+8. **Next 16 与你的训练数据不同**：写 Next 代码前先读 `node_modules/next/dist/docs/` 下的对应指南，别按 Next 13/14 的写法猜。独立 Node 脚本用 `.mts` 后缀（`node src/server/migrate.mts`），不引 tsx / ts-node。
 
 ## §5 数据层规范
 

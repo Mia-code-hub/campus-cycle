@@ -8,7 +8,9 @@
 不做支付/担保交易/物流对接（线上达成意向，线下自提）；不做实名认证、信用分、评价体系；不做自研模型与算法研究，只做商用大模型 API 的应用层编排；不做微服务、消息队列、Redis、K8s。
 
 ## 技术栈（锁定，不得替换、不得加白名单外依赖）
-Next.js 15 App Router + TypeScript（严格模式）｜Tailwind CSS，**不用 shadcn/antd/MUI/Chakra**｜后端用 Route Handler `src/app/api/**`，**不单独起 Node/Python 服务**｜SQLite + `better-sqlite3` 同步 API，**不用 ORM/Prisma**｜AI 用阿里百炼 DashScope OpenAI 兼容端点：`qwen-vl-max` / `qwen-plus` / `text-embedding-v3`｜ECharts 仅管理端看板｜鉴权用 `node:crypto` scrypt + HMAC 签名 cookie，**不用 NextAuth/Clerk/Passport**｜测试用 `node:test`。
+Next.js **16.4** App Router + React 19 + TypeScript（严格模式）｜**Tailwind CSS v4**（无 `tailwind.config.js`，主题令牌写在 `src/app/globals.css` 的 `@theme` 里，已定义 `bg-cream/bg-panel/bg-blush/bg-sky/bg-lilac/text-ink/text-ink-soft/rounded-card/shadow-soft/shadow-lift`，直接复用不要另造），**不用 shadcn/antd/MUI/Chakra**｜后端用 Route Handler `src/app/api/**`，**不单独起 Node/Python 服务**｜SQLite + `better-sqlite3` 同步 API，**不用 ORM/Prisma**｜AI 用阿里百炼 DashScope OpenAI 兼容端点：`qwen-vl-max` / `qwen-plus` / `text-embedding-v3`（SDK 用已装的 `openai`）｜ECharts 仅管理端看板｜鉴权用 `node:crypto` scrypt + HMAC 签名 cookie，**不用 NextAuth/Clerk/Passport**｜测试用 `node:test`。
+
+**Next 16 与你训练数据里的 Next 不一样**（`next.config.ts` 已有 `cacheComponents`/`partialPrefetching`/`serverExternalPackages`，`LayoutProps<"/">` 是生成的路由类型）：写任何 Next 代码前，先读 `node_modules/next/dist/docs/` 下对应指南，不要按 Next 13/14 的老写法猜。Node 脚本用 `.mts` 后缀直接 `node xxx.mts` 跑，不引 tsx/ts-node。
 
 ## 安全红线
 1. `DASHSCOPE_API_KEY` 只在服务端 `process.env` 读取，绝不出现在客户端组件、返回值、日志里。
